@@ -11,6 +11,7 @@ El objetivo de este tutorial es mostrar cómo configurar un servidor `DNS Bind9`
 ## Conclusiones
 
 ## Referencias
+* [Bind9 - Debian Wiki](https://wiki.debian.org/Bind9)
 * [Understanding views in BIND 9, by example](https://kb.isc.org/docs/aa-00851)
 * [Two-in-one DNS server with BIND9](https://www.howtoforge.com/two_in_one_dns_bind9_views)
 * [Vistas (views) en el servidor DNS Bind9 ](https://www.josedomingo.org/pledin/2017/12/vistas-views-en-el-servidor-dns-bind9/)
