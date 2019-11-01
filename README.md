@@ -14,7 +14,7 @@ Es común encontrarnos entornos de red, donde se necesite que un mismo servidor 
 
 Existencia de un servidor `DNS` dentro del direccionamiento `TCP/IP` de la subred de servicios, o cómo se le conoce comúnmente red `DMZ`, que da servicio a redes públicas (`Internet`, la red externa del provedor `ISP` o la `VPN` externa de una organización) y redes privadas (`Intranet` o red `LAN`, una `DMZ`, una `VPN` interna, o a todas ellas). Si se realiza la consulta desde el exterior, deben devolverse los registros públicos; sin embargo, si se hace la misma consulta desde cualquiera de las subredes internas, la resolución deberá ser a un registro privado. Esto es posible lograrlo, gracias a la funcionalidad de vistas (`views`) en `Bind9`.
 
-## Administración del servidor `Bind9 DNS`
+## Administración del servidor
 
 El servidor `DNS` de ejemplo utilizá los siguientes parámetros de configuración de red:
 
