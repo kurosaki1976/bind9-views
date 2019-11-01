@@ -1,4 +1,4 @@
-# Configuración de un servidor `DNS Bind9` con vistas en `Debian`
+# Configuración de un servidor DNS Bind9 con vistas en Debian
 
 ## Autor
 
