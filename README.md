@@ -139,7 +139,7 @@ view "public" {
 
 4. Crear ficheros de zonas.
 
-El sistema `DNS` está compuesto por varios registros, conocidos como Registros de Recursos (`Resource Records` o `RR`, en Inglés), que definen la información en el sistema de nombres de dominio, tanto para resolución de nombre __conocida también como directa o canónica__, como para resolución de nombre inversa (conversión de dirección `IP` a nombre).
+El sistema `DNS` está compuesto por varios registros, conocidos como Registros de Recursos (`Resource Records` o `RR`, en Inglés), que definen la información en el sistema de nombres de dominio, tanto para resolución de nombre -conocida también como directa o canónica-, como para resolución de nombre inversa (conversión de dirección `IP` a nombre).
 
 5. Crear fichero para almacenamiento de trazas, bitácora de eventos.
 
