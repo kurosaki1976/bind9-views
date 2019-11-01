@@ -135,7 +135,7 @@ view "public" {
 };
 ```
 
-> **NOTA**: Cuando se utiliza las funcionalidad de vistas, todas las definiciones de zonas **TIENEN** que estar incluidas dentro de éstas, de lo contrario el servicio no iniciará y generará códigos de error. Es por ello que el fichero `/etc/bind/named.conf.default-zones` fue incluido en cada definición de vista y no en el fichero de configuración principal.
+> **NOTA**: Cuando se utiliza las funcionalidad de vistas, todas las definiciones de zonas **TIENEN** que estar contenidas dentro de éstas, de lo contrario el servicio no iniciará y generará códigos de error. Es por ello que el fichero **`/etc/bind/named.conf.default-zones`** fue incluido en cada definición de vista y no en el fichero de configuración principal.
 
 5. Crear fichero para almacenamiento de trazas, bitácora de eventos.
 
