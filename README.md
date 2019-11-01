@@ -22,7 +22,7 @@ El servidor `DNS` de ejemplo utilizá los siguientes parámetros de configuraci�
 * Subred interna de la zona de servicios: `192.168.0.0/24`
 * Subred externa para registros públicos: `172.16.0.0/29`
 
-## Instalación
+### Instalación
 
 ```
 apt install bind9 dnsutils
@@ -30,7 +30,7 @@ apt install bind9 dnsutils
 
 Para disponer de la documentación `off-line`, instalar además `bind9-doc`.
 
-## Configuración
+### Configuración
 
 En las distribuciones `Debian GNU/Linux`, los ficheros de configuración del paquete `bind9`, se encuentran en `/etc/bind`. Ellos son: `named.conf` (fichero de configuración principal), `named.conf.default-zones` (contiene las zonas predefinidas de reenvío (`forward`), inversa (`reverse`) y difusión (`broadcast`) para el `localhost`), `named.conf.options` (contiene todos los parámetros para la operación del servicio), y `named.conf.local` (contiene las opciones de configuración y las declaraciones de zonas del servidor `DNS` local).
 
