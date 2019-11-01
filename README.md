@@ -80,7 +80,6 @@ options {
 	max-ncache-ttl 60;
 	flush-zones-on-shutdown yes;
 };
-
 controls {
 	inet 127.0.0.1 port 953
 	allow { localhost; 192.168.0.1; } keys { rndc-key; };
