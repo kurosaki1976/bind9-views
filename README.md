@@ -26,7 +26,7 @@ El servidor `DNS` de ejemplo utilizá los siguientes parámetros de configuraci�
 
 ### Instalación
 
-```
+```bash
 apt install bind9 dnsutils
 ```
 
