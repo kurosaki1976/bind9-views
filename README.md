@@ -4,6 +4,8 @@
 
 - [Ixen Rodríguez Pérez - kurosaki1976](ixenrp1976@gmail.com)
 
+## Resumen
+
 El objetivo de esta guía es mostrar cómo configurar un servidor `DNS Bind9` que brinde información distinta tanto a redes privadas como públicas, mediante el uso de la funcionalidad de vistas (`views`). Como tutorial en sí, se le guiará a través de todo el proceso de configuración, pero se requieren conocimientos iniciales de `DNS` y `Bind9`. En las [referencias](#referencias), encontrará enlaces a sitios de `Internet` que le pueden ayudar.
 
 ## Escenario
