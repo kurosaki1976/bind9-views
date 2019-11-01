@@ -47,6 +47,75 @@ include "/etc/bind/named.conf.local";
 include "/etc/bind/rndc.key";
 ```
 
+```bash
+cp /etc/bind/named.conf.options{,.org}
+nano /etc/bind/named.conf.options
+
+options {
+		version none;
+		directory "/var/cache/bind";
+		dnssec-enable yes;
+		dnssec-validation yes;
+		auth-nxdomain no;
+		interface-interval 0;
+		listen-on { 127.0.0.1; 192.168.0.1; };
+		listen-on-v6 { none; };
+		allow-query { any; };
+		empty-zones-enable no;
+		forwarders { 8.8.8.8; 8.8.4.4; };
+		forward first;
+		recursion no;
+		prefetch 0;
+		pid-file "/var/run/named/named.pid";
+		session-keyfile "/var/run/named/session.key";
+		minimal-responses yes;
+		max-cache-size 10m;
+		cleaning-interval 15;
+		max-cache-ttl 60;
+		max-ncache-ttl 60;
+		flush-zones-on-shutdown yes;
+};
+
+controls {
+        inet 127.0.0.1 port 953
+        allow { localhost; 192.168.0.1; } keys { rndc-key; };
+};
+```
+
+```bash
+nano /etc/bind/named.conf.log
+
+logging {
+		channel "named-query" {
+			file "/var/log/named_query.log" versions 3 size 5m;
+			severity debug 3;
+			print-time yes;
+		};
+		channel "debug" {
+			file "/var/log/named.log" versions 2 size 3m;
+			print-time yes;
+			print-category yes;
+		};
+		category "queries" { "named-query"; };
+		category "client" { "debug"; };
+		category "config" { "debug"; };
+		category "database" { "debug"; };
+		category "default" { "debug"; };
+		category "dispatch" { "debug"; };
+		category "dnssec" { "debug"; };
+		category "general" { "debug"; };
+		category "lame-servers" { "debug"; };
+		category "network" { "debug"; };
+		category "notify" { "debug"; };
+		category "resolver" { "debug"; };
+		category "security" { "debug"; };
+		category "unmatched" { "debug"; };
+		category "update" { "debug"; };
+		category "xfer-in" { "debug"; };
+		category "xfer-out" { "debug"; };
+};
+```
+
 ## Conclusiones
 
 ## Referencias
