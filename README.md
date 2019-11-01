@@ -87,6 +87,13 @@ controls {
 };
 ```
 
+Definir opciones de configuración y declaraciones de zonas del servidor `DNS`.
+
+```bash
+cp /etc/bind/named.conf.local{,.org}
+nano /etc/bind/named.conf.local
+```
+
 Crear fichero para almacenamiento de trazas, bitácora de eventos.
 
 ```bash
