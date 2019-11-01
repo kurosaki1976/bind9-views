@@ -92,6 +92,48 @@ Definir opciones de configuración y declaraciones de zonas del servidor `DNS`.
 ```bash
 cp /etc/bind/named.conf.local{,.org}
 nano /etc/bind/named.conf.local
+
+acl "INTRANET"  { 192.168.0.0/24; };
+view "private" {
+    match-clients { localhost; INTRANET; };
+    recursion yes;
+    allow-recursion { localhost; 192.168.0.0/24; };
+    allow-recursion-on { localhost; 192.168.0.1; };
+    include "/etc/bind/named.conf.default-zones";
+    zone "example.tld" {
+        type master;
+        file "/var/cache/bind/db.example.tld_private";
+        allow-query { localhost; INTRANET; };
+        allow-update { none; };
+        notify no;
+    };
+    zone "0.168.192.IN-ADDR.ARPA" {
+        type master;
+        file "/var/cache/bind/db.0.168.192.in-addr.arpa";
+        allow-query { localhost; INTRANET; };
+        allow-update { none; };
+        notify no;
+    };
+};
+view "public" {
+    match-clients { !INTRANET; any; };
+    recursion no;
+    include "/etc/bind/named.conf.default-zones";
+    zone "example.tld" {
+        type master;
+        file "/var/cache/bind/db.example.tld_public";
+        allow-query { any; };
+        allow-update { none; };
+        notify no;
+    };
+    zone "0.16.172.IN-ADDR.ARPA" {
+        type master;
+        file "/var/cache/bind/db.0.16.172.in-addr.arpa";
+        allow-query { any; };
+        allow-update { none; };
+        notify no;
+    };
+};
 ```
 
 Crear fichero para almacenamiento de trazas, bitácora de eventos.
