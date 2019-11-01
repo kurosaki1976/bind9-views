@@ -44,6 +44,7 @@ nano /etc/bind/named.conf
 
 include "/etc/bind/named.conf.options";
 include "/etc/bind/named.conf.local";
+include "/etc/bind/named.conf.log";
 include "/etc/bind/rndc.key";
 ```
 
