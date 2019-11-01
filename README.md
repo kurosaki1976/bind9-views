@@ -38,6 +38,8 @@ En las distribuciones `Debian GNU/Linux`, los ficheros de configuración del paq
 
 > **NOTA**: Es importante leer el archivo **`/usr/share/doc/bind9/README.Debian.gz`**, para obtener información sobre la estructura de los archivos de configuración del servicio `BIND` en `Debian`. De igual forma es una buena práctica realizar copias de seguridad de los ficheros mencionados en el párrafo anterior en su estado por defecto, **ANTES** de realizar modificaciones.
 
+Editar fichero de configuración principal.
+
 ```bash
 cp /etc/bind/named.conf{,.org}
 nano /etc/bind/named.conf
@@ -47,6 +49,8 @@ include "/etc/bind/named.conf.local";
 include "/etc/bind/named.conf.log";
 include "/etc/bind/rndc.key";
 ```
+
+Editar parámetros para la operación del servicio.
 
 ```bash
 cp /etc/bind/named.conf.options{,.org}
@@ -82,6 +86,8 @@ controls {
 	allow { localhost; 192.168.0.1; } keys { rndc-key; };
 };
 ```
+
+Crear fichero para almacenamiento de trazas, bitácora de eventos.
 
 ```bash
 nano /etc/bind/named.conf.log
