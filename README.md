@@ -137,6 +137,10 @@ view "public" {
 
 > **NOTA**: Cuando se utiliza las funcionalidad de vistas, todas las definiciones de zonas **TIENEN** que estar contenidas dentro de éstas, de lo contrario el servicio no iniciará y generará códigos de error. Es por ello que el fichero **`/etc/bind/named.conf.default-zones`** fue incluido en cada definición de vista y no en el fichero de configuración principal.
 
+4. Crear ficheros de zonas.
+
+El sistema `DNS` está compuesto por varios registros, conocidos como Registros de Recursos (`Resource Records` o `RR`, en Inglés), que definen la información en el sistema de nombres de dominio, tanto para resolución de nombre -conocida también como directa o canónica-, como para resolución de nombre inversa (conversión de dirección `IP` a nombre).
+
 5. Crear fichero para almacenamiento de trazas, bitácora de eventos.
 
 ```bash
