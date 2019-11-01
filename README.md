@@ -36,6 +36,17 @@ Para disponer de la documentación `off-line`, instalar además `bind9-doc`.
 
 En las distribuciones `Debian GNU/Linux`, los ficheros de configuración del paquete `bind9`, se encuentran en `/etc/bind`. Ellos son: `named.conf` (fichero de configuración principal), `named.conf.default-zones` (contiene las zonas predefinidas de reenvío (`forward`), inversa (`reverse`) y difusión (`broadcast`) para el `localhost`), `named.conf.options` (contiene todos los parámetros para la operación del servicio), y `named.conf.local` (contiene las opciones de configuración y las declaraciones de zonas del servidor `DNS` local).
 
+* Nota: Es importante leer el archivo `/usr/share/doc/bind9/README.Debian.gz` antes de realizar modificaciones en los ficheros mencionados en el párrafo anterior, para obtener información sobre la estructura de los archivos de configuración del servicio `BIND` en `Debian`. De igual forma es una buena práctica realizar copias de seguridad de esos ficheros en su estado por defecto. 
+
+```
+cp /etc/bind/named.conf{,.org}
+nano /etc/bind/named.conf
+
+include "/etc/bind/named.conf.options";
+include "/etc/bind/named.conf.local";
+include "/etc/bind/rndc.key";
+```
+
 ## Conclusiones
 
 ## Referencias
