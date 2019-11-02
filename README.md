@@ -46,6 +46,13 @@ domain example.tld
 nameserver 127.0.0.1
 ```
 
+```bash
+nano /etc/hosts
+
+127.0.0.1     localhost.localdomain   localhost
+192.168.0.1   ns.example.tld          ns
+```
+
 ### Instalación
 
 ```bash
