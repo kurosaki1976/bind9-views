@@ -443,7 +443,6 @@ Con la introducción en `Bind9` de la funcionalidad de vistas, otro mecanismo mu
 * [Internet Systems Consortium](https://www.youtube.com/user/ISCdotorg/videos)
 * [Two-in-one DNS server with BIND9](https://www.howtoforge.com/two_in_one_dns_bind9_views)
 * [Vistas (views) en el servidor DNS Bind9 ](https://www.josedomingo.org/pledin/2017/12/vistas-views-en-el-servidor-dns-bind9/)
-* [Bind9 como DNS con delegación de zona](https://www.sysadminsdecuba.com/2018/04/bind9-como-dns-con-delegacion-de-zona/)
 * [Limiting the Memory a Name Server Uses](https://flylib.com/books/en/2.684.1/limiting_the_memory_a_name_server_uses.html)
 * [SRV record](https://en.wikipedia.org/wiki/SRV_record)
 * [Services Record (SRV)](http://www.zytrax.com/books/dns/ch8/srv.html)
