@@ -157,7 +157,7 @@ view "public" {
 };
 ```
 
-> **NOTA**: Cuando se utiliza las funcionalidad de vistas, todas las definiciones de zonas **TIENEN** que estar contenidas dentro de éstas, de lo contrario el servicio no iniciará y generará códigos de error. Es por ello que el fichero `/etc/bind/named.conf.default-zones` fue incluido en cada definición de vista y no en el fichero de configuración principal.
+> **NOTA**: Cuando se utiliza las funcionalidad de vistas, todas las definiciones de zonas **TIENEN** que estar contenidas dentro de éstas, de lo contrario el servicio no iniciará y generará códigos de error. Es por ello que el fichero **`/etc/bind/named.conf.default-zones`** fue incluido en cada definición de vista y no en el fichero de configuración principal.
 
 4. Crear ficheros de zonas.
 
@@ -398,7 +398,7 @@ systemctl restart bind9.service
 tail -fn100 /var/log/syslog
 ```
 
-- Desde una red pública.
+- Desde una red pública
 
 ```bash
 dig example.tld
@@ -412,7 +412,7 @@ tail -fn100 /var/log/named_query.log
 tail -fn100 /var/log/named.log
 ```
 
-- Desde una red privada.
+- Desde una red privada
 
 ```bash
 nslookup example.tld
