@@ -409,8 +409,7 @@ tail -fn100 /var/log/syslog
 
 ```bash
 dig example.tld
-host example.tld
-host ns.example.tld
+nslookup -q=any example.tld
 host 172.16.0.2
 dig -t SRV @example.tld _xmpp-server._tcp.example.tld
 host -t SRV _imaps._tcp.example.tld
