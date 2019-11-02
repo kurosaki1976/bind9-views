@@ -163,7 +163,7 @@ view "public" {
 
 El sistema `DNS` está compuesto por varios registros, conocidos como Registros de Recursos (`Resource Records` o `RR`, en Inglés), que definen la información en el sistema de nombres de dominio, tanto para resolución de nombre -conocida también como directa o canónica (conversión de nombre a dirección `IP`)-, como para resolución de nombre inversa (conversión de dirección `IP` a nombre).
 
-a. Zona directa para consultas públicas
+- Zona directa para consultas públicas
 
 ```bash
 nano /etc/bind/db.example.tld_public
@@ -223,7 +223,7 @@ $TTL 18000  ; 5 hours
 _xmpp-server._tcp   IN  SRV     5 0 5269 jb.example.tld.
 ```
 
-b. Zona inversa para consultas públicas
+- Zona inversa para consultas públicas
 
 ```bash
 nano /etc/bind/db.0.16.172.in-addr.arpa
@@ -254,7 +254,7 @@ $ORIGIN 0.16.172.IN-ADDR.ARPA.
 5   IN  PTR jb.example.tld.
 ```
 
-c. Zona directa para consultas privadas
+- Zona directa para consultas privadas
 
 ```bash
 nano /etc/bind/db.example.tld_private
@@ -314,7 +314,7 @@ $TTL 18000  ; 5 hours
 _xmpp-server._tcp   IN  SRV     5 0 5269 jb.example.tld.
 ```
 
-d. Zona inversa para consultas privadas
+- Zona inversa para consultas privadas
 
 ```bash
 nano /etc/bind/db.0.168.192.in-addr.arpa
@@ -398,7 +398,7 @@ systemctl restart bind9.service
 tail -fn100 /var/log/syslog
 ```
 
-a. Desde una red pública.
+- Desde una red pública.
 
 ```bash
 dig example.tld
@@ -412,7 +412,7 @@ tail -fn100 /var/log/named_query.log
 tail -fn100 /var/log/named.log
 ```
 
-a. Desde una red privada.
+- Desde una red privada.
 
 ```bash
 nslookup example.tld
@@ -427,7 +427,7 @@ tail -fn100 /var/log/named.log
 
 ## Conclusiones
 
-Con la introducción en `Bind9` de la fucnionalidad de vistas, otro mecanismo muy útil en entornos de red que brindan servicos detrás de cortafuegos, es posible presentar una configuración del servidor `DNS` distinta a varios dispositivos. Algo particularmente provechoso si se ejecuta un servidor que recibe consultas desde redes privadas y públicas como es el caso de Internet.
+Con la introducción en `Bind9` de la funcionalidad de vistas, otro mecanismo muy útil en entornos de red que brindan servicios detrás de cortafuegos, es posible presentar una configuración del servidor `DNS` distinta a varios dispositivos. Algo particularmente provechoso si se ejecuta un servidor que recibe consultas desde redes privadas y públicas como es el caso de `Internet`.
 
 ## Referencias
 
