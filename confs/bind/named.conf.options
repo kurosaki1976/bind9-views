@@ -1,0 +1,28 @@
+options {
+    version none;
+    directory "/var/cache/bind";
+    dnssec-enable yes;
+    dnssec-validation yes;
+    auth-nxdomain no;
+    interface-interval 0;
+    listen-on { 127.0.0.1; 192.168.0.1; };
+    listen-on-v6 { none; };
+    allow-query { any; };
+    empty-zones-enable no;
+    forwarders { 8.8.8.8; 8.8.4.4; };
+    forward first;
+    recursion no;
+    prefetch 0;
+    pid-file "/var/run/named/named.pid";
+    session-keyfile "/var/run/named/session.key";
+    minimal-responses yes;
+    max-cache-size 10m;
+    cleaning-interval 15;
+    max-cache-ttl 60;
+    max-ncache-ttl 60;
+    flush-zones-on-shutdown yes;
+};
+controls {
+    inet 127.0.0.1 port 953
+    allow { localhost; 192.168.0.1; } keys { rndc-key; };
+};
