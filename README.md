@@ -10,7 +10,7 @@ El objetivo de esta guía es mostrar cómo configurar un servidor `DNS Bind9` qu
 
 ## Escenario
 
-Es común encontrarnos entornos de red, donde se necesite que un mismo servidor de nombres `DNS` devuelva registros tanto de tipo canónico como direcciones `IP`, dependiendo de la red desde donde se originen las consultas. Por ejemplo:
+Es común encontrarnos entornos de red, donde se necesite que un mismo servidor de nombres `DNS` devuelva registros de nombres como direcciones `IP`, dependiendo de la red desde donde se originen las consultas. Por ejemplo:
 
 Existencia de un servidor `DNS` dentro del direccionamiento `TCP/IP` de la subred de servicios, o cómo se le conoce comúnmente red `DMZ`, que da servicio a redes públicas (`Internet`, la red externa del provedor `ISP` o la `VPN` externa de una organización) y redes privadas (`Intranet` o red `LAN`, una `DMZ`, una `VPN` interna, o a todas ellas). Si se realiza la consulta desde el exterior, deben devolverse los registros públicos; sin embargo, si se hace la misma consulta desde cualquiera de las subredes internas, la resolución deberá ser a un registro privado. Esto es posible lograrlo, gracias a la funcionalidad de vistas (`views`) en `Bind9`.
 
