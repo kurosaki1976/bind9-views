@@ -28,7 +28,8 @@ El servidor `DNS` de ejemplo utilizá los siguientes parámetros de configuraci�
 
 ```bash
 nano /etc/network/interfaces
-
+```
+```bash
 auto lo
 iface lo inet loopback
 
@@ -41,14 +42,16 @@ iface eth0 inet static
 
 ```bash
 nano /etc/resolv.conf
-
+```
+```bash
 domain example.tld
 nameserver 127.0.0.1
 ```
 
 ```bash
 nano /etc/hosts
-
+```
+```bash
 127.0.0.1     localhost.localdomain   localhost
 192.168.0.1   ns.example.tld          ns
 ```
@@ -72,7 +75,8 @@ En las distribuciones `Debian GNU/Linux`, los ficheros de configuración del paq
 ```bash
 cp /etc/bind/named.conf{,.org}
 nano /etc/bind/named.conf
-
+```
+```bash
 include "/etc/bind/named.conf.options";
 include "/etc/bind/named.conf.local";
 include "/etc/bind/named.conf.log";
@@ -84,7 +88,8 @@ include "/etc/bind/rndc.key";
 ```bash
 cp /etc/bind/named.conf.options{,.org}
 nano /etc/bind/named.conf.options
-
+```
+```bash
 options {
 	version none;
 	directory "/var/cache/bind";
@@ -120,7 +125,8 @@ controls {
 ```bash
 cp /etc/bind/named.conf.local{,.org}
 nano /etc/bind/named.conf.local
-
+```
+```bash
 acl "INTRANET"  { 192.168.0.0/24; };
 view "private" {
 	match-clients { localhost; INTRANET; };
@@ -174,7 +180,8 @@ El sistema `DNS` está compuesto por varios registros, conocidos como Registros 
 
 ```bash
 nano /etc/bind/db.example.tld_public
-
+```
+```bash
 ;
 ; example.tld Public Forward Zone
 ;
@@ -234,7 +241,8 @@ _xmpp-server._tcp   IN  SRV     5 0 5269 jb.example.tld.
 
 ```bash
 nano /etc/bind/db.0.16.172.in-addr.arpa
-
+```
+```bash
 ;
 ; 0.16.172.in-addr.arpa Public Reverse Zone
 ;
@@ -265,7 +273,8 @@ $ORIGIN 0.16.172.IN-ADDR.ARPA.
 
 ```bash
 nano /etc/bind/db.example.tld_private
-
+```
+```bash
 ;
 ; example.tld Public Forward Zone
 ;
@@ -325,7 +334,8 @@ _xmpp-server._tcp   IN  SRV     5 0 5269 jb.example.tld.
 
 ```bash
 nano /etc/bind/db.0.168.192.in-addr.arpa
-
+```
+```bash
 ;
 ; 0.168.192.in-addr.arpa Public Reverse Zone
 ;
@@ -356,7 +366,8 @@ $ORIGIN 0.168.192.IN-ADDR.ARPA.
 
 ```bash
 nano /etc/bind/named.conf.log
-
+```
+```bash
 logging {
 	channel "named-query" {
 		file "/var/log/named_query.log" versions 3 size 5m;
