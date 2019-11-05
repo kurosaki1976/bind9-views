@@ -26,9 +26,8 @@ El servidor `DNS` de ejemplo utilizá los siguientes parámetros de configuraci�
 
 ### Ajustes de los parámetros de red
 
-```bash
-nano /etc/network/interfaces
-```
+* /etc/network/interfaces
+
 ```bash
 auto lo
 iface lo inet loopback
@@ -40,17 +39,15 @@ iface eth0 inet static
     dns-nameservers 127.0.0.1
 ```
 
-```bash
-nano /etc/resolv.conf
-```
+* /etc/resolv.conf
+
 ```bash
 domain example.tld
 nameserver 127.0.0.1
 ```
 
-```bash
-nano /etc/hosts
-```
+* /etc/hosts
+
 ```bash
 127.0.0.1     localhost.localdomain   localhost
 192.168.0.1   ns.example.tld          ns
