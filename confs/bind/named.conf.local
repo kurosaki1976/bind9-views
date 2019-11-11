@@ -2,7 +2,7 @@ acl "INTRANET"  { 192.168.0.0/24; };
 view "private" {
     match-clients { localhost; INTRANET; };
     recursion yes;
-    allow-recursion { localhost; 192.168.0.0/24; };
+    allow-recursion { localhost; INTRANET; };
     allow-recursion-on { localhost; 192.168.0.1; };
     include "/etc/bind/named.conf.default-zones";
     zone "example.tld" {

@@ -16,7 +16,11 @@ options {
     pid-file "/var/run/named/named.pid";
     session-keyfile "/var/run/named/session.key";
     minimal-responses yes;
-    max-cache-size 10m;
+    max-cache-size 128m;
+    rate-limit {
+        responses-per-second 15;
+        log-only no;
+    };
     cleaning-interval 15;
     max-cache-ttl 60;
     max-ncache-ttl 60;
@@ -24,5 +28,5 @@ options {
 };
 controls {
     inet 127.0.0.1 port 953
-    allow { localhost; 192.168.0.1; } keys { rndc-key; };
+        allow { localhost; 192.168.0.1; } keys { rndc-key; };
 };

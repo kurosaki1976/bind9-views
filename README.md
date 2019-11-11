@@ -10,7 +10,7 @@ El objetivo de esta guía es mostrar cómo configurar un servidor `DNS Bind9` qu
 
 ## Escenario
 
-Es común encontrarnos entornos de red, donde se necesite que un mismo servidor de nombres `DNS` devuelva registros de nombres como direcciones `IP`, dependiendo de la red desde donde se originen las consultas. Por ejemplo:
+Es común encontrarnos entornos de red, donde se necesite que un mismo servidor de nombres `DNS` devuelva registros tanto de tipo canónico como direcciones `IP`, dependiendo de la red desde donde se originen las consultas. Por ejemplo:
 
 Existencia de un servidor `DNS` dentro del direccionamiento `TCP/IP` de la subred de servicios, o cómo se le conoce comúnmente red `DMZ`, que da servicio a redes públicas (`Internet`, la red externa del provedor `ISP` o la `VPN` externa de una organización) y redes privadas (`Intranet` o red `LAN`, una `DMZ`, una `VPN` interna, o a todas ellas). Si se realiza la consulta desde el exterior, deben devolverse los registros públicos; sin embargo, si se hace la misma consulta desde cualquiera de las subredes internas, la resolución deberá ser a un registro privado. Esto es posible lograrlo, gracias a la funcionalidad de vistas (`views`) en `Bind9`.
 
@@ -26,9 +26,9 @@ El servidor `DNS` de ejemplo utilizá los siguientes parámetros de configuraci�
 
 ### Ajustes de los parámetros de red
 
-* /etc/network/interfaces
-
 ```bash
+nano /etc/network/interfaces
+
 auto lo
 iface lo inet loopback
 
@@ -39,16 +39,16 @@ iface eth0 inet static
     dns-nameservers 127.0.0.1
 ```
 
-* /etc/resolv.conf
-
 ```bash
+nano /etc/resolv.conf
+
 domain example.tld
 nameserver 127.0.0.1
 ```
 
-* /etc/hosts
-
 ```bash
+nano /etc/hosts
+
 127.0.0.1     localhost.localdomain   localhost
 192.168.0.1   ns.example.tld          ns
 ```
@@ -105,7 +105,11 @@ options {
 	pid-file "/var/run/named/named.pid";
 	session-keyfile "/var/run/named/session.key";
 	minimal-responses yes;
-	max-cache-size 10m;
+	max-cache-size 128m;
+    rate-limit {
+        responses-per-second 15;
+        log-only no;
+    };
 	cleaning-interval 15;
 	max-cache-ttl 60;
 	max-ncache-ttl 60;
@@ -113,7 +117,7 @@ options {
 };
 controls {
 	inet 127.0.0.1 port 953
-	allow { localhost; 192.168.0.1; } keys { rndc-key; };
+	   allow { localhost; 192.168.0.1; } keys { rndc-key; };
 };
 ```
 
@@ -128,7 +132,7 @@ acl "INTRANET"  { 192.168.0.0/24; };
 view "private" {
 	match-clients { localhost; INTRANET; };
 	recursion yes;
-	allow-recursion { localhost; 192.168.0.0/24; };
+	allow-recursion { localhost; INTRANET; };
 	allow-recursion-on { localhost; 192.168.0.1; };
 	include "/etc/bind/named.conf.default-zones";
 	zone "example.tld" {
@@ -441,7 +445,7 @@ tail -fn100 /var/log/named.log
 
 ## Conclusiones
 
-Con la introducción en `Bind9` de la funcionalidad de vistas, otro mecanismo muy útil en entornos de red que brindan servicios detrás de cortafuegos, es posible presentar una configuración del servidor `DNS` distinta a varios dispositivos. Algo particularmente provechoso si se ejecuta un servidor que recibe consultas desde redes privadas y públicas como es el caso de `Internet`.
+Con la introducción en `Bind9` de la funcionalidad de vistas, otro mecanismo muy útil en entornos de red que brindan servicos detrás de cortafuegos, es posible presentar una configuración del servidor `DNS` distinta a varios dispositivos. Algo particularmente provechoso si se ejecuta un servidor que recibe consultas desde redes privadas y públicas como es el caso de `Internet`.
 
 ## Referencias
 
