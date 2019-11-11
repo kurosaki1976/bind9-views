@@ -106,10 +106,10 @@ options {
 	session-keyfile "/var/run/named/session.key";
 	minimal-responses yes;
 	max-cache-size 128m;
-    rate-limit {
-        responses-per-second 15;
-        log-only no;
-    };
+    	rate-limit {
+        	responses-per-second 15;
+        	log-only no;
+    	};
 	cleaning-interval 15;
 	max-cache-ttl 60;
 	max-ncache-ttl 60;
