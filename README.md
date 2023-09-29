@@ -192,9 +192,9 @@ $ORIGIN .
 $TTL 604800
 example.tld  IN  SOA ns.example.tld.  postmaster.example.tld. (
                 2019103101  ; Serial
-                600         ; refresh
-                180         ; retry
-                604800      ; expire
+                3600        ; refresh
+                600         ; retry
+                1209600     ; expire
                 3600        ; negative cache ttl
                 )
 ;
@@ -253,9 +253,9 @@ $ORIGIN .
 $TTL 604800
 0.16.172.IN-ADDR.ARPA   IN  SOA ns.example.tld.  postmaster.example.tld. (
                 2019103101  ; Serial
-                600         ; refresh
-                180         ; retry
-                604800      ; expire
+                3600        ; refresh
+                600         ; retry
+                1209600     ; expire
                 3600        ; negative cache ttl
                 )
 ;
@@ -285,9 +285,9 @@ $ORIGIN .
 $TTL 604800
 example.tld  IN  SOA ns.example.tld.  postmaster.example.tld. (
                 2019103101  ; Serial
-                600         ; refresh
-                180         ; retry
-                604800      ; expire
+                3600        ; refresh
+                600         ; retry
+                1209600     ; expire
                 3600        ; negative cache ttl
                 )
 ;
@@ -346,9 +346,9 @@ $ORIGIN .
 $TTL 604800
 0.168.192.IN-ADDR.ARPA   IN  SOA ns.example.tld.  postmaster.example.tld. (
                 2019103101  ; Serial
-                600         ; refresh
-                180         ; retry
-                604800      ; expire
+                3600        ; refresh
+                600         ; retry
+                1209600     ; expire
                 3600        ; negative cache ttl
                 )
 ;
