@@ -92,7 +92,6 @@ nano /etc/bind/named.conf.options
 options {
 	version none;
 	directory "/var/cache/bind";
-	dnssec-enable yes;
 	dnssec-validation yes;
 	auth-nxdomain no;
 	interface-interval 0;
@@ -112,7 +111,6 @@ options {
         	responses-per-second 15;
         	log-only no;
     	};
-	cleaning-interval 15;
 	max-cache-ttl 60;
 	max-ncache-ttl 60;
 	flush-zones-on-shutdown yes;
@@ -368,38 +366,84 @@ $ORIGIN 0.168.192.IN-ADDR.ARPA.
 5. Crear fichero para almacenamiento de trazas, bitácora de eventos.
 
 ```bash
+mkdir -p /var/log/named/
+chown -R bind /var/log/named/
+chmod u+rw /var/log/named/
+```
+
+```bash
 nano /etc/bind/named.conf.log
 ```
 ```bash
 logging {
-	channel "named-query" {
-		file "/var/log/named_query.log" versions 3 size 5m;
-		severity debug 3;
-		print-time yes;
-	};
-	channel "debug" {
-		file "/var/log/named.log" versions 2 size 3m;
-		print-time yes;
-		print-category yes;
-	};
-	category "queries" { "named-query"; };
-	category "client" { "debug"; };
-	category "config" { "debug"; };
-	category "database" { "debug"; };
-	category "default" { "debug"; };
-	category "dispatch" { "debug"; };
-	category "dnssec" { "debug"; };
-	category "general" { "debug"; };
-	category "lame-servers" { "debug"; };
-	category "network" { "debug"; };
-	category "notify" { "debug"; };
-	category "resolver" { "debug"; };
-	category "security" { "debug"; };
-	category "unmatched" { "debug"; };
-	category "update" { "debug"; };
-	category "xfer-in" { "debug"; };
-	category "xfer-out" { "debug"; };
+     channel default_syslog {
+             syslog local2;
+     };
+     channel audit_log {
+             file "/var/log/named/audit.log" size 10m;
+             severity debug;
+             print-category yes;
+             print-severity yes;
+             print-time yes;
+     };
+     channel requests_log {
+             // DNS requests logging
+             file "/var/log/named/requests.log" size 10m;
+             severity debug;
+             print-time yes;
+             print-category yes;
+             print-severity yes;
+     };
+     channel null {
+             null;
+     };
+     category default { default_syslog; };
+     category general { audit_log; };
+     category security { audit_log; };
+     category config { audit_log; };
+     category resolver { audit_log; };
+     category xfer-in { audit_log; };
+     category xfer-out { audit_log; };
+     category notify { audit_log; };
+     category client { audit_log; };
+     category network { audit_log; };
+     category update { audit_log; };
+     category queries { requests_log; audit_log; };
+     category lame-servers { null; };
 };
+```
+
+5.1. Definir rotación de los archivos de bitácora.
+
+```bash
+nano /etc/logrotate.d/named
+```
+```bash
+/var/log/named/audit.log {
+    daily
+    missingok
+    rotate 7
+    compress
+    delaycompress
+    notifempty
+    create 644 bind bind
+    postrotate
+        systemctl reload named > /dev/null
+    endscript
+}
+
+/var/log/named/requests.log {
+    daily
+    missingok
+    rotate 7
+    compress
+    delaycompress
+    notifempty
+    create 644 bind bind
+    postrotate
+        systemctl reload named > /dev/null
+    endscript
+}
 ```
 
 6. Comprobar la existencia de errores tanto en la configuración como en los ficheros de zonas.
@@ -412,11 +456,18 @@ named-checkzone example.tld /etc/bind/db.example.tld_private
 named-checkzone 0.168.192.in-addr.arpa /etc/bind/db.0.168.192.in-addr.arpa
 ```
 
-7. Reiniciar el servicio y realizar comprobaciones.
+7. Reiniciar servicios y realizar comprobaciones.
 
 ```bash
-systemctl restart bind9.service
+systemctl restart logrotate named
 tail -fn100 /var/log/syslog
+```
+
+7.1. Comprobar correcta ejecución del servidor `Bind9 DNS`.
+
+```bash
+netstat -tapn | grep 53
+netstat -lptun
 ```
 
 - Desde una red pública
