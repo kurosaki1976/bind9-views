@@ -363,15 +363,12 @@ $ORIGIN 0.168.192.IN-ADDR.ARPA.
 4   IN  PTR jb.example.tld.
 ```
 
-5. Crear directorio para almacenamiento de trazas, bitácora de eventos.
+5. Crear estructura para almacenamiento de trazas, bitácora de eventos.
 
 ```bash
 mkdir -p /var/log/named/
 chown -R bind /var/log/named/
 chmod u+rw /var/log/named/
-```
-
-```bash
 nano /etc/bind/named.conf.log
 ```
 ```bash
