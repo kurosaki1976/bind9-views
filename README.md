@@ -463,7 +463,7 @@ systemctl restart logrotate named
 tail -fn100 /var/log/syslog
 ```
 
-- Comprobar correcta ejecución del servidor `Bind9 DNS`.
+- Comprobar correcta ejecución del servidor
 
 ```bash
 netstat -tapn | grep 53
