@@ -363,7 +363,7 @@ $ORIGIN 0.168.192.IN-ADDR.ARPA.
 4   IN  PTR jb.example.tld.
 ```
 
-5. Crear fichero para almacenamiento de trazas, bitácora de eventos.
+5. Crear directorio para almacenamiento de trazas, bitácora de eventos.
 
 ```bash
 mkdir -p /var/log/named/
@@ -413,7 +413,7 @@ logging {
 };
 ```
 
-5.1. Definir rotación de los archivos de bitácora.
+- Definir rotación de los archivos de bitácora.
 
 ```bash
 nano /etc/logrotate.d/named
@@ -463,7 +463,7 @@ systemctl restart logrotate named
 tail -fn100 /var/log/syslog
 ```
 
-7.1. Comprobar correcta ejecución del servidor `Bind9 DNS`.
+- Comprobar correcta ejecución del servidor `Bind9 DNS`.
 
 ```bash
 netstat -tapn | grep 53
