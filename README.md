@@ -231,7 +231,7 @@ _pop3   IN    SRV   10 0 110 pop3.example.tld.
 _pop3s  IN    SRV   10 0 995 pop3.example.tld.
 _submission  IN	SRV    10 0 587 pop3.example.tld.
 _xmpp-client IN	SRV	5 0 5222 jb.example.tld.
-_xmpp-client IN	SRV	5 0 5223 jb.example.tld.
+_xmpps-client IN SRV	5 0 5223 jb.example.tld.
 _xmpp-server IN	SRV     5 0 5269 jb.example.tld.
 ;
 $ORIGIN _tcp.conference.example.tld.
@@ -326,7 +326,7 @@ _pop3   IN    SRV   10 0 110 pop3.example.tld.
 _pop3s  IN    SRV   10 0 995 pop3.example.tld.
 _submission  IN    SRV   10 0 587 pop3.example.tld.
 _xmpp-client IN     SRV     5 0 5222 jb.example.tld.
-_xmpp-client IN     SRV     5 0 5223 jb.example.tld.
+_xmpps-client IN     SRV     5 0 5223 jb.example.tld.
 _xmpp-server IN     SRV     5 0 5269 jb.example.tld.
 ;
 $ORIGIN _tcp.conference.example.tld.
