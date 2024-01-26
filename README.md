@@ -92,7 +92,7 @@ nano /etc/bind/named.conf.options
 options {
 	version none;
 	directory "/var/cache/bind";
-	dnssec-validation yes;
+	dnssec-validation auto;
 	auth-nxdomain no;
 	interface-interval 0;
 	listen-on { 127.0.0.1; 192.168.0.1; };
@@ -187,13 +187,13 @@ nano /etc/bind/db.example.tld_public
 ; example.tld Public Forward Zone
 ;
 $ORIGIN .
-$TTL 604800
+$TTL 1W
 example.tld  IN  SOA ns.example.tld.  postmaster.example.tld. (
-                2019103101  ; Serial
-                3600        ; refresh
-                600         ; retry
-                1209600     ; expire
-                3600        ; negative cache ttl
+                2019103101 ; serial
+                1H         ; refresh
+                10M        ; retry
+                2W         ; expire
+                1H         ; negative cache ttl
                 )
 ;
         NS  ns.example.tld.
@@ -202,6 +202,7 @@ example.tld  IN  SOA ns.example.tld.  postmaster.example.tld. (
         TXT "v=spf1 ip4:172.16.0.3 a:mail.example.tld ~all"
 ;
 $ORIGIN example.tld.
+$TTL 5M
 ns    IN  A   172.16.0.2
 mail  IN  A   172.16.0.3
 www   IN  A   172.16.0.4
@@ -214,11 +215,11 @@ webmail     IN  CNAME   mail
 conference  IN  CNAME   jb
 ;
 $ORIGIN _udp.example.tld.
-$TTL 900    ; 15 minutes
+$TTL 5M
 _domain   IN  SRV    5 0 53 ns.example.tld.
 ;
 $ORIGIN _tcp.example.tld.
-$TTL 900    ; 15 minutes
+$TTL 5M
 _domain IN    SRV    5 0 53 ns.example.tld.
 _http   IN    SRV    5 0 80 www.example.tld.
 _https  IN    SRV    5 0 443 www.example.tld.
@@ -228,14 +229,14 @@ _imap   IN    SRV   10 0 143 imap.example.tld.
 _imaps  IN    SRV   10 0 993 imap.example.tld.
 _pop3   IN    SRV   10 0 110 pop3.example.tld.
 _pop3s  IN    SRV   10 0 995 pop3.example.tld.
-_submission  IN    SRV   10 0 587 pop3.example.tld.
-$TTL 18000  ; 5 hours
-_xmpp-client IN     SRV     5 0 5222 jb.example.tld.
-_xmpp-server IN     SRV     5 0 5269 jb.example.tld.
+_submission  IN	SRV    10 0 587 pop3.example.tld.
+_xmpp-client IN	SRV	5 0 5222 jb.example.tld.
+_xmpp-client IN	SRV	5 0 5223 jb.example.tld.
+_xmpp-server IN	SRV     5 0 5269 jb.example.tld.
 ;
-$ORIGIN conference.example.tld.
-$TTL 18000  ; 5 hours
-_xmpp-server._tcp   IN  SRV     5 0 5269 jb.example.tld.
+$ORIGIN _tcp.conference.example.tld.
+$TTL 5M
+_xmpp-server IN	SRV     5 0 5269 jb.example.tld.
 ```
 
 - Zona inversa para consultas públicas
@@ -248,18 +249,19 @@ nano /etc/bind/db.0.16.172.in-addr.arpa
 ; 0.16.172.in-addr.arpa Public Reverse Zone
 ;
 $ORIGIN .
-$TTL 604800
+$TTL 1W
 0.16.172.IN-ADDR.ARPA   IN  SOA ns.example.tld.  postmaster.example.tld. (
-                2019103101  ; Serial
-                3600        ; refresh
-                600         ; retry
-                1209600     ; expire
-                3600        ; negative cache ttl
+                2019103101 ; serial
+                1H         ; refresh
+                10M        ; retry
+                2W         ; expire
+                1H         ; negative cache ttl
                 )
 ;
         IN  NS  ns.example.tld.
 ;
 $ORIGIN 0.16.172.IN-ADDR.ARPA.
+$TTL 5M
 2   IN  PTR ns.example.tld.
 3   IN  PTR mail.example.tld.
         PTR smtp.example.tld.
@@ -280,13 +282,13 @@ nano /etc/bind/db.example.tld_private
 ; example.tld Public Forward Zone
 ;
 $ORIGIN .
-$TTL 604800
+$TTL 1W
 example.tld  IN  SOA ns.example.tld.  postmaster.example.tld. (
-                2019103101  ; Serial
-                3600        ; refresh
-                600         ; retry
-                1209600     ; expire
-                3600        ; negative cache ttl
+                2019103101 ; serial
+                1H         ; refresh
+                10M        ; retry
+                2W         ; expire
+                1H         ; negative cache ttl
                 )
 ;
         NS  ns.example.tld.
@@ -295,6 +297,7 @@ example.tld  IN  SOA ns.example.tld.  postmaster.example.tld. (
         TXT "v=spf1 ip4:192.168.0.2 a:mail.example.tld ~all"
 ;
 $ORIGIN example.tld.
+$TTL 5M
 ns    IN  A   192.168.0.1
 mail  IN  A   192.168.0.2
 www   IN  A   192.168.0.3
@@ -307,11 +310,11 @@ webmail     IN  CNAME   mail
 conference  IN  CNAME   jb
 ;
 $ORIGIN _udp.example.tld.
-$TTL 900    ; 15 minutes
+$TTL 5M
 _domain   IN  SRV    5 0 53 ns.example.tld.
 ;
 $ORIGIN _tcp.example.tld.
-$TTL 900    ; 15 minutes
+$TTL 5M
 _domain IN    SRV    5 0 53 ns.example.tld.
 _http   IN    SRV    5 0 80 www.example.tld.
 _https  IN    SRV    5 0 443 www.example.tld.
@@ -322,13 +325,13 @@ _imaps  IN    SRV   10 0 993 imap.example.tld.
 _pop3   IN    SRV   10 0 110 pop3.example.tld.
 _pop3s  IN    SRV   10 0 995 pop3.example.tld.
 _submission  IN    SRV   10 0 587 pop3.example.tld.
-$TTL 18000  ; 5 hours
 _xmpp-client IN     SRV     5 0 5222 jb.example.tld.
+_xmpp-client IN     SRV     5 0 5223 jb.example.tld.
 _xmpp-server IN     SRV     5 0 5269 jb.example.tld.
 ;
-$ORIGIN conference.example.tld.
-$TTL 18000  ; 5 hours
-_xmpp-server._tcp   IN  SRV     5 0 5269 jb.example.tld.
+$ORIGIN _tcp.conference.example.tld.
+$TTL 5M
+_xmpp-server IN  SRV     5 0 5269 jb.example.tld.
 ```
 
 - Zona inversa para consultas privadas
@@ -341,18 +344,19 @@ nano /etc/bind/db.0.168.192.in-addr.arpa
 ; 0.168.192.in-addr.arpa Public Reverse Zone
 ;
 $ORIGIN .
-$TTL 604800
+$TTL 1W
 0.168.192.IN-ADDR.ARPA   IN  SOA ns.example.tld.  postmaster.example.tld. (
-                2019103101  ; Serial
-                3600        ; refresh
-                600         ; retry
-                1209600     ; expire
-                3600        ; negative cache ttl
+                2019103101 ; serial
+                1H         ; refresh
+                10M        ; retry
+                2W         ; expire
+                1H         ; negative cache ttl
                 )
 ;
         IN  NS  ns.example.tld.
 ;
 $ORIGIN 0.168.192.IN-ADDR.ARPA.
+$TTL 5M
 1   IN  PTR ns.example.tld.
 2   IN  PTR mail.example.tld.
         PTR smtp.example.tld.
